@@ -1,0 +1,129 @@
+﻿@model IEnumerable<AtlasBlog.Models.BlogPost>
+
+@using AtlasBlog.Services
+@using AtlasBlog.Services.Interfaces
+
+@inject IImageService _imageService
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.IsInRole("Administrator"))
+{
+    <div class="d-flex container-fluid justify-content-start p-3">
+        <button class="btn btn-lg btn-outline-success border-3">
+            <a style="color:black" asp-action="Create">Create New</a>
+        </button>
+    </div>
+}
+
+<h1 class="px-3 fw-bold" style="color:seagreen">Choose a Post to Read</h1>
+
+
+<div class="d-flex container justify-content-center">
+    <div class="row">
+
+
+        <!-- Post preview-->
+        @foreach (var blogPost in Model)
+        {
+            <div class="card border-3 border-success mb-3 m-2" style="max-width: 250px">
+                @if (blogPost.ImageData is not null)
+                {
+                    <img src="@_imageService.ConvertByteArrayToFile(blogPost.ImageData, blogPost.ImageType)" class="img-fluid card-img-top" />
+                }
+                <div class="card-body">
+
+                    <a asp-action="Details" asp-route-slug="@blogPost.Slug">
+                        <h5 class="card-title">@blogPost.Title</h5>
+                        <p class="card-text">
+                            <h6 class="post-subtitle">@blogPost.Abstract</h6>
+                            
+                        </p>
+                    </a>
+
+                </div>
+                <div class="card-footer">
+                    <small class="post-meta" style="font-size:medium">
+                        Created By Brandon Martin on @blogPost.Created.ToString("MMM dd, yyyy")
+                    </small>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@*<table class="table table-responsive table-bordered table-striped table-success me-5">
+    <thead>
+    <tr>
+    <th></th>
+
+    <th>
+    @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+    Created
+    </th>
+
+    <th>
+    @Html.DisplayNameFor(model => model.Abstract)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.BlogPostState)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Body)
+    </th>
+
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    </td>
+
+    <td>
+    @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+    @item.Created.ToString("MMM dd, yyyy")
+    </td>
+
+    <td>
+    @Html.DisplayFor(modelItem => item.Abstract)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.BlogPostState)
+    </td>
+    <td>
+    @Html.Raw(item.Body)
+    </td>
+    <td class="fw-bold">
+    <a asp-action="Details" asp-route-slug="@item.Slug">Read More</a>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+    @if (User.IsInRole("Administrator"))
+    {
+
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    }
+    </td>
+    </tr>
+    }
+    </tbody>
+    </table>*@

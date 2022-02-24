@@ -1,0 +1,80 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using AtlasBlog.Models
+@using X.PagedList.Web.Common
+@using AtlasBlog.Services
+@using AtlasBlog.Services.Interfaces
+@inject IImageService _imageService
+@model IPagedList<Blog>
+
+<div class="d-flex container justify-content-center">
+    <div class="row">
+
+
+        <!-- Post preview-->
+        @foreach (var blog in Model)
+        {
+            <div class="card border-3 border-success mb-3 m-2" style="max-width: 250px">
+                @if (blog.ImageData is not null)
+                {
+                    <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid card-img-top" />
+                }
+                <div class="card-body">
+
+                    <a asp-action="BlogChildIndex" asp-controller="BlogPosts" asp-route-blogId="@blog.Id">
+                        <h5 class="card-title">@blog.BlogName</h5>
+                        <p class="card-text">
+                            <h6 class="post-subtitle">@blog.Description</h6>
+                        </p>
+                    </a>
+
+                </div>
+                <div class="card-footer">
+                    <small class="post-meta" style="font-size:medium">
+                        Created By Brandon Martin on @blog.Created.ToString("MMM dd, yyyy")
+                    </small>
+                </div>
+            </div>
+
+
+        }
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Divider-->
+<hr class="my-4" />
+
+
+
+
+
+
+@*Now I can start building paging mechanism*@
+
+<div class="d-flex justify-content-center align-items-center p-2">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+    @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
+    new PagedListRenderOptions
+
+    {
+    LiElementClasses = new string[] {"page-item"},
+    PageClasses = new string[] {"page-link"}
+    })
+</div>
+
+
+
+

@@ -1,0 +1,150 @@
+﻿@using AtlasBlog.Enums
+@model AtlasBlog.Models.BlogPost
+@inject AtlasBlog.Services.Interfaces.IImageService _imageService
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="px-5 fw-bold" style="color:seagreen">Create</h1>
+
+<h3 class="px-5">New Blog Post</h3>
+<hr />
+<div class="d-flex container-fluid justify-content-center">
+    <div class="col-md-4">
+        <div class="form-group">
+            <span class="fw-bold" style="color:seagreen"> *Choose a tag(s) to add to your post. If you don't see your tag(s), please create a new one before before continuing with your post!</span>
+            <label for="TagIds" class="control-label"></label>
+            <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagIds" multiple></select>
+            <button type="button" class="btn btn-sm btn-warning btn-outline-dark  w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#addNewTag">Create New Tag</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-4 px-5 border-3 form-group">
+    <div>
+@*        <button type="button" class="btn btn-sm btn-warning btn-outline-dark  w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#addNewTag">Create New Tag</button>
+*@    </div>
+    <form asp-action="Create" id="frmCreate" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="BlogId" class="control-label py-2"></label>
+            <select asp-for="BlogId" class="form-control" asp-items="ViewBag.BlogId"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Title" class="control-label py-2"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Abstract" class="control-label py-2"></label>
+            <input asp-for="Abstract" class="form-control" />
+            <span asp-validation-for="Abstract" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BlogPostState" class="control-label py-2"></label>
+            <select asp-for="BlogPostState" class="form-control" asp-items="@Html.GetEnumSelectList<BlogPostState>()"></select>
+            <span asp-validation-for="BlogPostState" class="text-danger"></span>
+        </div>
+
+        <div class="form-group py-2">
+            <label asp-for="Body" class="control-label"></label>
+            <div id="editor"></div>
+            <input asp-for="Body" type="hidden" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
+                   onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+            @if (Model?.ImageData != null)
+            {
+                <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType)" class="img-fluid" />
+            }
+      
+        </div>
+
+        @*       <div class="form-group">
+            <label for="TagIds" class="control-label">Tag(s)</label>
+            <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagIds" multiple></select>
+            </div>
+
+            <div>
+            <button type="button" class="btn btn-sm btn-warning btn-outline-dark  w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#addNewTag">Create New Tag</button>
+            </div>*@
+
+        <div class="form-group">
+            <input type="submit" value="Create Post" class="btn btn-outline-success my-2 border-3" />
+        </div>
+    </form>
+</div>
+
+
+
+<div>
+    <a asp-action="Index" class="px-5">Back to List</a>
+</div>
+
+<!-- Modals SEction -->
+<div class="modal fade" id="addNewTag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Tag</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @*Add In a Form for creating a new tag*@
+                <form asp-action="Create" asp-controller="Tags">
+                    <div class="form-group py-2">
+                        <label class="form-label" for="text">Text</label>
+                        <input class=form-control name="Text" id="text" />
+                    </div>
+                    <div class="form-group py-2 ">
+                        <label class="form-label fw-bold" for="Description">Description</label>
+                        <textarea class="form-control" id="Description" name="Description" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button class="btn btn-sm btn-outline-success border-3 w-100 fw-bold">Save</button>
+                    </div>
+
+
+
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-btn-outline-success border-3" data-bs-dismiss="modal">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+<script>
+    document.getElementById('frmCreate').addEventListener("submit", function() {
+        document.getElementById('Body').value = quill.container.firstChild.innerHTML;
+
+    });
+</script>
+
+
+}

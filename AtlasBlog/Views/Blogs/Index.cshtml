@@ -1,0 +1,101 @@
+﻿@using AtlasBlog.Models
+@using AtlasBlog.Services
+@using AtlasBlog.Services.Interfaces
+
+@model IEnumerable<Blog>
+
+@inject IImageService _imageService
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@if (User.IsInRole("Administrator"))
+{
+    <div class="d-flex container-fluid justify-content-start p-3">
+        <button class="btn btn-lg btn-outline-success border-3">
+            <a style="color:black" asp-action="Create">Create New</a>
+        </button>
+    </div>
+}
+<h1 class="px-3 fw-bold" style="color:seagreen">Choose a Blog</h1>
+
+
+
+<div class="d-flex container justify-content-center">
+    <div class="row">
+
+
+        <!-- Post preview-->
+        @foreach (var blog in Model)
+        {
+            <div class="card border-3 border-success mb-3 m-2" style="max-width: 250px">
+                @if (blog.ImageData is not null)
+                {
+                    <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid card-img-top" />
+                }
+                <div class="card-body">
+
+                    <a asp-action="BlogChildIndex" asp-controller="BlogPosts" asp-route-blogId="@blog.Id">
+                        <h5 class="card-title">@blog.BlogName</h5>
+                        <p class="card-text">
+                            <h6 class="post-subtitle">@blog.Description</h6>
+                        </p>
+                    </a>
+
+                </div>
+                <div class="card-footer">
+                    <small class="post-meta" style="font-size:medium">
+                        Created By Brandon Martin on @blog.Created.ToString("MMM dd, yyyy")
+                    </small>
+                </div>
+            </div>
+
+
+        }
+
+
+    </div>
+</div>
+
+
+@*<table class="table table-striped table-bordered table-success ms-2 me-2 p-3">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                                      <img src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageType!)" class="img-fluid" alt="...">
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@

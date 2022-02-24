@@ -1,0 +1,62 @@
+﻿@model AtlasBlog.Models.Blog
+@inject AtlasBlog.Services.Interfaces.IImageService _imageService
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="px-5 fw-bold" style="color:seagreen">Edit</h1>
+
+<h4 class="px-5">Blog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 px-5">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />            <div class="form-group">
+                <label asp-for="BlogName" class="control-label"></label>
+                <input asp-for="BlogName" class="form-control" />
+                <span asp-validation-for="BlogName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Updated" class="control-label"></label>
+                <input asp-for="Updated" class="form-control" />
+                <span asp-validation-for="Updated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
+                       onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                @if (Model?.ImageData != null)
+                {
+                     <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType)" class="img-fluid" />
+                }
+          
+            </div>
+            <div class="form-group py-2">
+                <input type="submit" value="Save" class="btn btn-outline-success border-3" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="px-5" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
