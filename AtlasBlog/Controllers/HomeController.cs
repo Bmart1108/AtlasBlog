@@ -1,6 +1,6 @@
 ﻿using AtlasBlog.Data;
 using AtlasBlog.Models;
-using AtlasBlog.Views;
+using AtlasBlog.ViewModels;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -30,25 +30,21 @@ namespace AtlasBlog.Controllers
             _emailSender = emailSender;
             _appSettings = appSettings;
         }
-
-        public async Task<IActionResult> ContactMe()
+        public async Task <IActionResult> ContactMe()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ContactMe([Bind("Name,Email,Subject,Body")] ContactMe contactme)
         {
-            //I am using the information to build an email
-            // await _emailSender.SendEmailAsync("destination email", "subject", "body")
+            //await _emailService.SendEmailAsync("Destination Email", "Subject", "Body")
             var emailSubject = $"Atlas Blog: {contactme.Subject}";
-            var emailBody = $"{contactme.Body} <br/>{contactme.Name}<br/>{contactme.Email}";
+            var emailBody = $"{contactme.Body} <br/> {contactme.Name} <br/> {contactme.Email}";
             await _emailSender.SendEmailAsync(_appSettings["SmtpSettings:UserName"], emailSubject, emailBody);
             return RedirectToAction(nameof(Index));
-
         }
-
-
         public async Task<IActionResult> Index(int? pageNum)
         {
             //pagNum = pageNum ?? 1;

@@ -64,44 +64,6 @@
 
 
 
-@*<div>
-    <h4>BlogPost</h4>
-    <hr />
-    <dl class="row">
-    <dt class="col-sm-2">
-    @Html.DisplayNameFor(model => model.Title)
-    </dt>
-    <dd class="col-sm-10">
-    @Html.DisplayFor(model => model.Title)
-    </dd>
-
-    <dt class="col-sm-2">
-    @Html.DisplayNameFor(model => model.Body)
-    </dt>
-    <dd class="col-sm-10">
-    @Html.DisplayFor(model => model.Body)
-    </dd>
-    <dt class="col-sm-2">
-    @Html.DisplayNameFor(model => model.Created)
-    </dt>
-    <dd class="col-sm-10">
-    @Html.DisplayFor(model => model.Created)
-    </dd>
-    <dt class="col-sm-2">
-    @Html.DisplayNameFor(model => model.Updated)
-    </dt>
-    <dd class="col-sm-10">
-    @Html.DisplayFor(model => model.Updated)
-    </dd>
-    <dt class="col-sm-2">
-    @Html.DisplayNameFor(model => model.Blog)
-    </dt>
-    <dd class="col-sm-10">
-    @Html.DisplayFor(model => model.Blog.BlogName)
-    </dd>
-    </dl>
-    </div>*@
-
 
 <hr />
 
@@ -128,52 +90,54 @@ else
 
 <hr />
 
-<div class="container">
-    <div id="CommentSection" class="row">
-        @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
-        {
-            <div class="col-12 my-2">
-                <div class="targetParent card border-dark mb-3 w-100">
-                    <div class="card-header">
-                        <span class="float-start">Author: @comment.Author?.FullName</span>
-                        @if (comment.ModeratedDate is null)
-                        {
-                            <span class="float-end">Created on: @comment.CreatedDate.ToString("MMM dd, yyyy")</span>
-                        }
-                        else
-                        {
-                            <span class="float-end text-danger fst-italic">Moderated on: @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
-                        }
-                    </div>
-                    <div class="targetChild card-body text-dark">
-                        @if (comment.ModeratedDate is null)
-                        {
-                            <h5 class="card-title">@comment.CommentBody</h5>
-                        }
-                        else
-                        {
-                            <h6 class="text-danger fst-italic">Moderation Reason: @comment.ModerationReason</h6>
-                            <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
-                        }
-                    </div>
+    <div class="d-flex container justify-content-center">
 
-                    @*THIS IS FOR THE COMMENT AUTHOR*@
-                    @if (comment.ModeratedDate is null && (comment.AuthorId == _userManager.GetUserId(User)))
+        <div class="card border-success border-3 mb-3" id="CommentSection">
+            @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate)) 
+            {
+
+                <div class="targetParent card-header bg-transparent border-success" style="font-size:smaller">
+
+
+
+                    <div class="float-start">Author: @comment.Author?.FullName |</div>
+                    @if (comment.ModeratedDate is null)
                     {
-                        <div class="card-footer">
-                            <div class="row row-cols-1 row-cols-md-2 g-2">
-                                <div class="col">
-                                    <button class="btnModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
-                                </div>
-                                <div class="col">
-                                    @*SweetAlert Window*@
-                                    <button class="btnSwal btn btn-danger btn-sm w-100" data-commentId=@comment.Id>DELETE</button>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="float-end">| Created on: @comment.CreatedDate.ToString("MMM dd, yyyy")</div>
+                    }
+                    else
+                    {
+                        <span class="float-end text-danger fst-italic">Moderated on: @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
+                    }
+                </div>
+                <div class="card-body text-success">
+                    @if (comment.ModeratedDate is null)
+                    {
+                        <h5 class="card-title">@comment.CommentBody</h5>
+                    }
+                    else
+                    {
+                        <h6 class="text-danger fst-italic">Moderation Reason: @comment.ModerationReason</h6>
+                        <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
                     }
 
-                    @*THIS IS FOR THE COMMENT MODERATOR*@
+
+                </div>
+                @if (comment.ModeratedDate is null && (comment.AuthorId == _userManager.GetUserId(User)))
+                {
+                    <div class="card-footer">
+                        <div class="row row-cols-1 row-cols-md-2 g-2">
+                            <div class="col">
+                                <button class="btnModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
+                            </div>
+                            <div class="col">
+                                @*SweetAlert Window*@
+                                <button class="btnSwal btn btn-danger btn-sm w-100" data-commentId=@comment.Id>DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="card-footer bg-transparent border-success">
                     @if (User.IsInRole("Moderator"))
                     {
                         <div class="card-footer">
@@ -185,10 +149,30 @@ else
                         </div>
                     }
                 </div>
-            </div>
-        }
+
+            }
+        </div>
+
     </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div>
     @if (User.IsInRole("Administrator"))
@@ -344,4 +328,4 @@ else
     });
 </script>
 
-}
+    }
