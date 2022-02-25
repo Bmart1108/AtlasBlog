@@ -32,12 +32,12 @@
 
             <a class="navbar-brand justify-content-start" asp-controller="Home" asp-action="Index"><span class="text-warning">||</span>Brandon's Blog<span class="text-warning">||</span></a>
             @*      <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
-                    <input name="SearchTerm" class="form-control" />
-                    <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
-                    </form>*@
+                <input name="SearchTerm" class="form-control" />
+                <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
+                </form>*@
 
-               <form class="st-default-search-input mt-2" asp-action="SearchIndex" asp-controller="BlogPosts">
-                <input id="Mainsearch" name="SearchTerm"/> 
+            <form class="st-default-search-input mt-2" asp-action="SearchIndex" asp-controller="BlogPosts">
+                <input id="Mainsearch" name="SearchTerm" />
 
                 <button class="btn btn-sm btn-outline-warning py-2 px-3 mb-1" type="submit">Search</button>
 
@@ -60,22 +60,23 @@
         </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/Img/home-bg.jpg')" />
-
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <span class="subheading"></span>
-                    @*     <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
-                            <input name="SearchTerm" class="form-control" />
-                            <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
-                            </form>*@
-                </div>
-            </div>
-        </div>
-    </div>
+    <header class="masthead" style="background-image: url('/Img/newMastheadBGimg.jpg')">
     </header>
+
+    @* <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+        <span class="subheading"></span>
+        <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
+        <input name="SearchTerm" class="form-control" />
+        <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>*@
+
 
     <div class="container-fluid">
         @RenderBody()
