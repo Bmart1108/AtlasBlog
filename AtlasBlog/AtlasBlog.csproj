@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Img\about-bg.jpg" />
-    <Content Remove="wwwroot\Img\contact-bg.jpg" />
-    <Content Remove="wwwroot\Img\home-bg.jpg" />
-    <Content Remove="wwwroot\Img\post-bg.jpg" />
-    <Content Remove="wwwroot\Img\post-sample-image.jpg" />
+    <Content Remove="wwwroot\img\about-bg.jpg" />
+    <Content Remove="wwwroot\img\contact-bg.jpg" />
+    <Content Remove="wwwroot\img\home-bg.jpg" />
+    <Content Remove="wwwroot\img\post-bg.jpg" />
+    <Content Remove="wwwroot\img\post-sample-image.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,11 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Img\about-bg.jpg" />
-    <None Include="wwwroot\Img\contact-bg.jpg" />
-    <None Include="wwwroot\Img\home-bg.jpg" />
-    <None Include="wwwroot\Img\post-bg.jpg" />
-    <None Include="wwwroot\Img\post-sample-image.jpg" />
+    <None Include="wwwroot\img\about-bg.jpg" />
+    <None Include="wwwroot\img\contact-bg.jpg" />
+    <None Include="wwwroot\img\home-bg.jpg" />
+    <None Include="wwwroot\img\post-bg.jpg" />
+    <None Include="wwwroot\img\post-sample-image.jpg" />
   </ItemGroup>
 
 </Project>
