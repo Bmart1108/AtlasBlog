@@ -31,15 +31,18 @@
         <!-- Post preview-->
         @foreach (var blog in Model)
         {
-            <div class="card  border-3 border-success mb-3 m-2" style="max-width: 300px">
+            <div class="card text-center border-3 border-success mb-3 m-2" style="max-width: 300px">
                 @if (blog.ImageData is not null)
                 {
                     <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid  card-img-top" />
-                }
-                <div class="card-body">
-
                     <a asp-action="BlogChildIndex" asp-controller="BlogPosts" asp-route-blogId="@blog.Id">
                         <h5 class="card-title">@blog.BlogName</h5>
+                    </a>
+                }
+                <div class="card-body text-center border-bottom border-top border-success border-2">
+
+                    <a asp-action="BlogChildIndex" asp-controller="BlogPosts" asp-route-blogId="@blog.Id">
+
                         <p class="card-text">
                             <h6 class="post-subtitle">@blog.Description</h6>
                         </p>

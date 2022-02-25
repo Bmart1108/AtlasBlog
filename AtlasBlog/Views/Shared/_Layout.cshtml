@@ -27,7 +27,7 @@
 
     <!-- Navigation-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light" id="mainNav">
-        <div class="container-fluid px-4 px-lg-5">
+        <div class="container-fluid">
             <img src="~/Img/BrandonMartinWhiteLOGO1.png" height=60 />
 
             <a class="navbar-brand justify-content-start" asp-controller="Home" asp-action="Index"><span class="text-warning">||</span>Brandon's Blog<span class="text-warning">||</span></a>
@@ -60,31 +60,22 @@
         </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/Img/newMastheadBGimg.jpg')">
+    <header class="masthead mb-1" style="background-image: url('/Img/newMastheadBGimg.jpg')">
+        
     </header>
 
-    @* <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="site-heading">
-        <span class="subheading"></span>
-        <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
-        <input name="SearchTerm" class="form-control" />
-        <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>*@
 
 
-    <div class="container-fluid">
-        @RenderBody()
-    </div>
+
+
+
+        <div class="container-fluid BodyBG py-5">
+           @RenderBody()
+        </div>
 
 
     <!-- Footer-->
-    <footer class="border-top">
+    <footer class="border-top BodyBG" style="color:transparent">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
