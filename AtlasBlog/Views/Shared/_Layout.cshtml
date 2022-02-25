@@ -36,11 +36,13 @@
                 <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
                 </form>*@
 
-            <form class="d-flex" asp-action="SearchIndex" asp-controller="BlogPosts">
-                <input name="SearchTerm" class="form-control" />
-                <button class="btn btn-outline-warning" type="submit">Search</button>
+            <form class="st-default-search-input mt-2" asp-action="SearchIndex" asp-controller="BlogPosts">
+                <input id="Mainsearch" name="SearchTerm"/> 
+                
+                <button class="btn btn-sm btn-outline-warning py-2 mb-1" type="submit">Search</button>
+               
             </form>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler"   type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
@@ -58,7 +60,7 @@
         </div>
     </nav>
     <!-- Page Header-->
-    <header class="masthead" style="background-image: url('/Img/home-bg.jpg')"  />
+    <header class="masthead" style="background-image: url('/Img/home-bg.jpg')">
         
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">

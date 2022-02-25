@@ -24,17 +24,17 @@
 
 
 
-<div class="d-flex container justify-content-center">
+<div class="container">
     <div class="row">
 
 
         <!-- Post preview-->
         @foreach (var blog in Model)
         {
-            <div class="card border-3 border-success mb-3 m-2" style="max-width: 250px">
+            <div class="card  border-3 border-success mb-3 m-2" style="max-width: 300px">
                 @if (blog.ImageData is not null)
                 {
-                    <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid card-img-top" />
+                    <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid  card-img-top" />
                 }
                 <div class="card-body">
 
@@ -46,20 +46,28 @@
                     </a>
 
                 </div>
+
                 <div class="card-footer">
                     <small class="post-meta" style="font-size:medium">
                         Created By Brandon Martin on @blog.Created.ToString("MMM dd, yyyy")
                     </small>
-                    <div class="d-flex justify-content-center">
+                    <div class="container">
                         @if (User.IsInRole("Administrator"))
                         {
-                            <button class="btn btn-sm btn-outline-danger border-3">
-                                <a asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
+                            <button class="btn btn-sm btn-outline-danger border-3 m-1">
+                                <a style="color:black" asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
 
                             </button>
+                            <button class="btn btn-sm btn-outline-success border-3 m-1 px-4">
+                                <a style="color:black" asp-action="Edit" asp-route-id="@blog.Id">Edit</a>
+                            </button>
+
+
                         }
                     </div>
+
                 </div>
+
             </div>
 
 

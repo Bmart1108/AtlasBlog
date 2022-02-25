@@ -27,7 +27,7 @@
         <!-- Post preview-->
         @foreach (var blogPost in Model)
         {
-            <div class="card border-3 border-success mb-3 m-2" style="max-width: 250px">
+            <div class="card  border-3 border-success mb-3 m-2" style="max-width: 300px">
                 @if (blogPost.ImageData is not null)
                 {
                     <img src="@_imageService.ConvertByteArrayToFile(blogPost.ImageData, blogPost.ImageType)" class="img-fluid card-img-top" />
@@ -38,7 +38,7 @@
                         <h5 class="card-title">@blogPost.Title</h5>
                         <p class="card-text">
                             <h6 class="post-subtitle">@blogPost.Abstract</h6>
-                            
+
                         </p>
                     </a>
 
@@ -47,7 +47,23 @@
                     <small class="post-meta" style="font-size:medium">
                         Created By Brandon Martin on @blogPost.Created.ToString("MMM dd, yyyy")
                     </small>
+                    <div class="container">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <button class="btn btn-sm btn-outline-danger border-3 m-1">
+                                <a style="color:black" asp-action="Delete" asp-route-id="@blogPost.Id">Delete</a>
+
+                            </button>
+                            <button class="btn btn-sm btn-outline-success border-3 m-1 px-4">
+                                <a style="color:black" asp-action="Edit" asp-route-id="@blogPost.Id">Edit</a>
+                            </button>
+
+
+                        }
+                    </div>
                 </div>
+
+
             </div>
         }
     </div>
