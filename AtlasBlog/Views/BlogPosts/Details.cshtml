@@ -35,7 +35,9 @@
                         {
                             <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType)" class="img-fluid" />
                         }
+                         
                     </div>
+                   
                 </div>
 
                 <p>@Html.Raw(Model.Body)</p>
@@ -56,10 +58,7 @@
         @Html.DisplayNameFor(model => model.Updated)
         @Html.DisplayFor(model => model.Updated)
     </li>
-    <li>
-        @Html.DisplayNameFor(model => model.Blog)
-        @Html.DisplayFor(model => model.Blog.BlogName)
-    </li>
+ 
 </ul>
 
 

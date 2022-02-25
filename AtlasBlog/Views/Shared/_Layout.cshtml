@@ -32,13 +32,15 @@
 
             <a class="navbar-brand justify-content-start" asp-controller="Home" asp-action="Index"><span class="text-warning">||</span>Brandon's Blog<span class="text-warning">||</span></a>
             @*      <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
-                <input name="SearchTerm" class="form-control" />
-                <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
-                </form>*@
+                    <input name="SearchTerm" class="form-control" />
+                    <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
+                    </form>*@
 
-            <form class="d-flex" asp-action="SearchIndex" asp-controller="BlogPosts">
-                <input name="SearchTerm" class="form-control" />
-                <button class="btn btn-outline-warning" type="submit">Search</button>
+               <form class="st-default-search-input mt-2" asp-action="SearchIndex" asp-controller="BlogPosts">
+                <input id="Mainsearch" name="SearchTerm"/> 
+
+                <button class="btn btn-sm btn-outline-warning py-2 px-3 mb-1" type="submit">Search</button>
+
             </form>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -66,9 +68,9 @@
                 <div class="site-heading">
                     <span class="subheading"></span>
                     @*     <form class="mt-5" asp-action="SearchIndex" asp-controller="BlogPosts">
-                        <input name="SearchTerm" class="form-control" />
-                        <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
-                        </form>*@
+                            <input name="SearchTerm" class="form-control" />
+                            <button type="submit" class="btn btn-warning btn-sm w-100">Search </button>
+                            </form>*@
                 </div>
             </div>
         </div>
