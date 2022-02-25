@@ -50,6 +50,15 @@
                     <small class="post-meta" style="font-size:medium">
                         Created By Brandon Martin on @blog.Created.ToString("MMM dd, yyyy")
                     </small>
+                    <div class="d-flex justify-content-center">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <button class="btn btn-sm btn-outline-danger border-3">
+                                <a asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
+
+                            </button>
+                        }
+                    </div>
                 </div>
             </div>
 
@@ -63,39 +72,39 @@
 
 @*<table class="table table-striped table-bordered table-success ms-2 me-2 p-3">
     <thead>
-        <tr>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+    <tr>
+    <th></th>
+    <th>
+    @Html.DisplayNameFor(model => model.BlogName)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Description)
+    </th>
 
-            <th></th>
-        </tr>
+    <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                                      <img src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageType!)" class="img-fluid" alt="...">
-                    
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    <img src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageType!)" class="img-fluid" alt="...">
 
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.BlogName)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Description)
+    </td>
+
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+    </tr>
+    }
     </tbody>
-</table>*@
+    </table>*@

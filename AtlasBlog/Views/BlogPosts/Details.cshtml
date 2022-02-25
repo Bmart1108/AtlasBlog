@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <p>@Html.DisplayFor(model => model.Body)</p>
+                <p>@Html.Raw(Model.Body)</p>
 
             </div>
         </div>
@@ -90,71 +90,70 @@ else
 
 <hr />
 
-    <div class="d-flex container justify-content-center">
+<div class="d-flex container justify-content-center">
 
-        <div class="card border-success border-3 mb-3" id="CommentSection">
-            @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate)) 
+    <div class="card border-success border-3 mb-3" id="CommentSection">
+        @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
+        {
+
+            <div class="targetParent card-header bg-transparent border-success" style="font-size:smaller">
+
+
+
+                <div class="float-start">Author: @comment.Author?.FullName |</div>
+                @if (comment.ModeratedDate is null)
+                {
+                    <div class="float-end">| Created on: @comment.CreatedDate.ToString("MMM dd, yyyy")</div>
+                }
+                else
+                {
+                    <span class="float-end text-danger fst-italic">Moderated on: @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
+                }
+            </div>
+            <div class="card-body text-success">
+                @if (comment.ModeratedDate is null)
+                {
+                    <h5 class="card-title">@comment.CommentBody</h5>
+                }
+                else
+                {
+                    <h6 class="text-danger fst-italic">Moderation Reason: @comment.ModerationReason</h6>
+                    <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
+                }
+
+
+            </div>
+            @if (comment.ModeratedDate is null && (comment.AuthorId == _userManager.GetUserId(User)))
             {
-
-                <div class="targetParent card-header bg-transparent border-success" style="font-size:smaller">
-
-
-
-                    <div class="float-start">Author: @comment.Author?.FullName |</div>
-                    @if (comment.ModeratedDate is null)
-                    {
-                        <div class="float-end">| Created on: @comment.CreatedDate.ToString("MMM dd, yyyy")</div>
-                    }
-                    else
-                    {
-                        <span class="float-end text-danger fst-italic">Moderated on: @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
-                    }
+                <div class="card-footer">
+                    <div class="row row-cols-1 row-cols-md-2 g-2">
+                        <div class="col">
+                            <button class="btnModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
+                        </div>
+                        <div class="col">
+                            @*SweetAlert Window*@
+                            <button class="btnSwal btn btn-danger btn-sm w-100" data-commentId=@comment.Id>DELETE</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body text-success">
-                    @if (comment.ModeratedDate is null)
-                    {
-                        <h5 class="card-title">@comment.CommentBody</h5>
-                    }
-                    else
-                    {
-                        <h6 class="text-danger fst-italic">Moderation Reason: @comment.ModerationReason</h6>
-                        <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
-                    }
-
-
-                </div>
-                @if (comment.ModeratedDate is null && (comment.AuthorId == _userManager.GetUserId(User)))
+            }
+            <div class="card-footer bg-transparent border-success">
+                @if (User.IsInRole("Moderator"))
                 {
                     <div class="card-footer">
-                        <div class="row row-cols-1 row-cols-md-2 g-2">
+                        <div class="row row-cols-1 g-2">
                             <div class="col">
-                                <button class="btnModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
-                            </div>
-                            <div class="col">
-                                @*SweetAlert Window*@
-                                <button class="btnSwal btn btn-danger btn-sm w-100" data-commentId=@comment.Id>DELETE</button>
+                                <button class="btnModModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
                             </div>
                         </div>
                     </div>
                 }
-                <div class="card-footer bg-transparent border-success">
-                    @if (User.IsInRole("Moderator"))
-                    {
-                        <div class="card-footer">
-                            <div class="row row-cols-1 g-2">
-                                <div class="col">
-                                    <button class="btnModModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
+            </div>
 
-            }
-        </div>
-
+        }
     </div>
 
+</div>
 
 
 
@@ -174,10 +173,12 @@ else
 
 
 
-<div>
+
+<div class="px-5">
     @if (User.IsInRole("Administrator"))
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id">Edit |</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id">Delete |</a>
     }
     <a asp-action="Index">Back to List</a>
 </div>
