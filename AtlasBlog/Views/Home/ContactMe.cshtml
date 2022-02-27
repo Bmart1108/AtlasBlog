@@ -2,39 +2,89 @@
 @model ContactMe
 
 <!-- Main Content-->
-<div class="d-flex container-fluid justify-content-center">
+@*<div class="d-flex container-fluid justify-content-center">
 
     <div class="col-4 col-md-6 fw-bold mb-3" style="color:seagreen">
-        <form asp-action="ContactMe">
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <textarea asp-for="Body" rows="10" class="form-control"></textarea>
-            </div>
-
-            <div class="d-flex justify-content-center py-2">
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-lg btn-outline-success border-3" />
-                </div>
-            </div>
-
-        </form>
+    <form asp-action="ContactMe">
+    <div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
     </div>
 
+    <div class="form-group">
+    <label asp-for="Email" class="control-label"></label>
+    <input type="email" asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+    <label asp-for="Subject" class="control-label"></label>
+    <input asp-for="Subject" class="form-control" />
+    </div>
+
+    <div class="form-group">
+    <label asp-for="Body" class="control-label"></label>
+    <textarea asp-for="Body" rows="10" class="form-control"></textarea>
+    </div>
+
+    <div class="d-flex justify-content-center py-2">
+    <div class="form-group">
+    <input type="submit" value="Create" class="btn btn-lg btn-outline-success border-3" />
+    </div>
+    </div>
+
+    </form>
+    </div>
+
+    </div>*@
+
+<!----CONTACT FORM---->
+<div class="container d-flex justify-content-end align-items-start">
+    <form style="color:seagreen" asp-action="ContactMe" class="row g-3 p-2">
+        <h1>Contact Me</h1>
+        <div class="p-2 border border-2 rounded shadow bg-light" id="formContainingDiv">
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-md-6 form-group py-1">
+                        <label asp-for="Name" class="form-label">Name:</label>
+                        <input asp-for="Name" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6 form-group py-1">
+                        <label asp-for="Email" class="form-label">Email Address:</label>
+                        <input asp-for="Email" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6 form-group py-1">
+                        <label asp-for="Subject" class="form-label">Subject:</label>
+                        <input asp-for="Subject" class="form-control"  placeholder="Message Subject" />
+                    </div>
+                    <div class="col-12 col-md-6 form-group py-1 mt-1">
+                        <label for="inputContactReason" class="formLabel">Contact Reason:</label>
+                        <select class="form-select mt-1" name="contactReason">
+                            <option>Choose one...</option>
+                            <option value="freelance">Freelance Work</option>
+                            <option value="contract">Contract Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group py-1">
+                        <label asp-for="Body" for="inputMessage" class="form-label">Message:</label>
+                        <textarea asp-for="Body" class="form-control" rows="10"
+                                  placeholder="Write your message here"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-center py-2">
+                        <div class="form-group">
+                            <input type="submit" value="Send" class="btn btn-lg btn-outline-success border-3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
 </div>
+
+
+
 
 
