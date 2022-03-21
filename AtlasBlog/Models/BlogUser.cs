@@ -6,7 +6,14 @@ namespace AtlasBlog.Models
 {
     public class BlogUser : IdentityUser
     {
+        /// <summary>
+        ///  First name of Blog User
+        /// </summary>
         public string FirstName { get; set; } = "";
+
+        /// <summary>
+        /// Last name of the Blog User
+        /// </summary>
         public string LastName { get; set; } = "";
         public string? DisplayName { get; set; }
 
