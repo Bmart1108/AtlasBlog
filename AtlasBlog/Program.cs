@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,29 @@ builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+
+//Register the Swagger API service
+builder.Services.AddSwaggerGen(s =>
+{
+    OpenApiInfo openApiInfo = new()
+    {
+        Title = "Atlas Blog API",
+        Version = "v1",
+        Description = "Candidate API for Atlas Blog",
+        Contact = new()
+        {
+            Name = "Brandon Martin",
+            Url = new("https://bmartin-portfolio.netlify.app/")
+        },
+        License = new()
+        {
+            Name = "Api License",
+            Url = new("https://bmartin-portfolio.netlify.app/")
+        }
+    };
+    s.SwaggerDoc(openApiInfo.Version, openApiInfo);
+
+});
 
 builder.Services.AddTransient<IEmailSender, BasicEmailService>();
 builder.Services.AddTransient<DataService>();
@@ -59,6 +83,20 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+//Call on our Configured API Service
+app.UseSwagger();
+app.UseSwaggerUI(s =>
+{
+    s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
+    if (!app.Environment.IsDevelopment())
+    {
+        s.RoutePrefix = "";
+    }
+});
+
+
 
 app.MapControllerRoute(
     name: "custom",

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AtlasBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220223213530_changedmodels")]
-    partial class changedmodels
+    [Migration("20220302161614_initial0001")]
+    partial class initial0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,11 +75,6 @@ namespace AtlasBlog.Data.Migrations
                     b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("BlogName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
                     b.Property<int>("BlogPostState")
                         .HasColumnType("integer");
 
@@ -89,11 +84,6 @@ namespace AtlasBlog.Data.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
 
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("bytea");
