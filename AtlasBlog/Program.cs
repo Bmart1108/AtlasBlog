@@ -16,6 +16,15 @@ var connectionString = ConnectionService.GetConnectionString(builder.Configurati
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+//Adding in a CORS policy to asvoid getting denied from portfolio
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultCorsPolicy", builder =>
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+});
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -81,6 +90,9 @@ else
     app.UseHsts();
 }
 
+app.UseCors("DefaultCorsPolicy");
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -95,6 +107,8 @@ app.UseSwagger();
 app.UseSwaggerUI(s =>
 {
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
+    s.InjectStylesheet("/css/swaggerUI.css");
+    s.InjectJavascript("/js/swaggerUI.js");
     if (!app.Environment.IsDevelopment())
     {
         s.RoutePrefix = "";
