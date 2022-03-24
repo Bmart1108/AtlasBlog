@@ -103,18 +103,6 @@ app.UseAuthorization();
 
 
 //Call on our Configured API Service
-app.UseSwagger();
-app.UseSwaggerUI(s =>
-{
-    s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
-    s.InjectStylesheet("/css/swaggerUI.css");
-    s.InjectJavascript("/js/swaggerUI.js");
-
-    if (!app.Environment.IsDevelopment())
-    {
-        s.RoutePrefix = "";
-    }
-});
 
 
 
@@ -127,6 +115,21 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseSwagger();
+app.UseSwaggerUI(s =>
+{
+    s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
+    s.InjectStylesheet("/css/swaggerUI.css");
+    s.InjectJavascript("/js/swaggerUI.js");
+    s.DocumentTitle = "Brandon's Blog API";
+
+    if (!app.Environment.IsDevelopment())
+    {
+        s.RoutePrefix = "";
+    }
+});
+
 
 app.MapRazorPages();
 
