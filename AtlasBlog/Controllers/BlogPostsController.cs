@@ -62,27 +62,6 @@ namespace AtlasBlog.Controllers
         }
 
 
-
-
-        // GET: BlogPosts/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var blogPost = await _context.BlogPosts
-        //        .Include(b => b.Blog)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (blogPost == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(blogPost);
-        //}
-
         public async Task<IActionResult> Details(string slug)
         {
 
