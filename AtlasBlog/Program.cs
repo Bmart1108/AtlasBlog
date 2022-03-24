@@ -110,11 +110,11 @@ app.UseSwaggerUI(s =>
     s.InjectStylesheet("/css/swaggerUI.css");
     s.InjectJavascript("/js/swaggerUI.js");
 
-//    if (!app.Environment.IsDevelopment())
-//    {
-//        s.RoutePrefix = "";
-//    }
-//});
+    if (!app.Environment.IsDevelopment())
+    {
+        s.RoutePrefix = "";
+    }
+});
 
 
 
