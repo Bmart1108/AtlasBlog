@@ -7,7 +7,7 @@ using AtlasBlog.Enums;
 
 namespace AtlasBlog.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("Home/Index")]
     [ApiController]
     public class BlogPostsApiController : ControllerBase
     {
