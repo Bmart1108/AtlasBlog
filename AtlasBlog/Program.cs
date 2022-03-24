@@ -109,11 +109,12 @@ app.UseSwaggerUI(s =>
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
     s.InjectStylesheet("/css/swaggerUI.css");
     s.InjectJavascript("/js/swaggerUI.js");
-    if (!app.Environment.IsDevelopment())
-    {
-        s.RoutePrefix = "";
-    }
-});
+
+//    if (!app.Environment.IsDevelopment())
+//    {
+//        s.RoutePrefix = "";
+//    }
+//});
 
 
 
