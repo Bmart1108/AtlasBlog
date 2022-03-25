@@ -108,7 +108,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "custom",
-    pattern: "Post/Detail/{slug}",
+    pattern: "BlogPost/Detail/{slug}",
     defaults: new { controller = "BlogPosts", action = "Details" }
 );
 
