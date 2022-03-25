@@ -21,7 +21,7 @@
                         {
                             <img src="@_imageService.ConvertByteArrayToFile(blog.ImageData, blog.ImageType)" class="img-fluid card-img-top" />
                             <a asp-action="BlogChildIndex" asp-controller="BlogPosts" asp-route-blogId="@blog.Id">
-                                <h5 class="card-title">@blog.BlogName</h5>
+                                <h5 class="card-title text-center">@blog.BlogName</h5>
                             </a>
                         }
                         <div class="card-body border-2 border-top border-bottom border-success">
