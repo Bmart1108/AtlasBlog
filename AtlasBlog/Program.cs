@@ -123,11 +123,6 @@ app.UseSwaggerUI(s =>
     s.InjectStylesheet("/css/swaggerUI.css");
     s.InjectJavascript("/js/swaggerUI.js");
     s.DocumentTitle = "Brandon's Blog API";
-
-    if (!app.Environment.IsDevelopment())
-    {
-        s.RoutePrefix = "";
-    }
 });
 
 
